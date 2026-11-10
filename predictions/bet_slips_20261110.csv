@@ -1,0 +1,67 @@
+slip_id,strategy,market,size,combined_prob,pick_num,Date,HomeTeam,AwayTeam,Team,Market_Type,pick_value,probability,score
+1,top_mixed,mixed,3,0.4885,1,2026-11-11,Portland Trail Blazers,Oklahoma City Thunder,Oklahoma City Thunder,Spread,Oklahoma City Thunder +2.0,0.7509,0.8097
+1,top_mixed,mixed,3,0.4885,2,2026-11-11,Utah Jazz,Miami Heat,Over,Total,Over 228.5,0.8449,0.5743
+1,top_mixed,mixed,3,0.4885,3,2026-11-11,Sacramento Kings,Orlando Magic,Orlando Magic,ML,Orlando Magic ML,0.77,0.5234
+2,top_mixed,mixed,4,0.3703,1,2026-11-11,Portland Trail Blazers,Oklahoma City Thunder,Oklahoma City Thunder,Spread,Oklahoma City Thunder +2.0,0.7509,0.8097
+2,top_mixed,mixed,4,0.3703,2,2026-11-11,Utah Jazz,Miami Heat,Over,Total,Over 228.5,0.8449,0.5743
+2,top_mixed,mixed,4,0.3703,3,2026-11-11,Sacramento Kings,Orlando Magic,Orlando Magic,ML,Orlando Magic ML,0.77,0.5234
+2,top_mixed,mixed,4,0.3703,4,2026-11-11,New York Knicks,Milwaukee Bucks,Over,Total,Over 221.0,0.758,0.5153
+3,top_mixed,mixed,5,0.2662,1,2026-11-11,Portland Trail Blazers,Oklahoma City Thunder,Oklahoma City Thunder,Spread,Oklahoma City Thunder +2.0,0.7509,0.8097
+3,top_mixed,mixed,5,0.2662,2,2026-11-11,Utah Jazz,Miami Heat,Over,Total,Over 228.5,0.8449,0.5743
+3,top_mixed,mixed,5,0.2662,3,2026-11-11,Sacramento Kings,Orlando Magic,Orlando Magic,ML,Orlando Magic ML,0.77,0.5234
+3,top_mixed,mixed,5,0.2662,4,2026-11-11,New York Knicks,Milwaukee Bucks,Over,Total,Over 221.0,0.758,0.5153
+3,top_mixed,mixed,5,0.2662,5,2026-11-11,Philadelphia 76ers,Boston Celtics,Boston Celtics,ML,Boston Celtics ML,0.7189,0.4887
+4,top_mixed,mixed,6,0.1476,1,2026-11-11,Portland Trail Blazers,Oklahoma City Thunder,Oklahoma City Thunder,Spread,Oklahoma City Thunder +2.0,0.7509,0.8097
+4,top_mixed,mixed,6,0.1476,2,2026-11-11,Utah Jazz,Miami Heat,Miami Heat,ML,Miami Heat ML,0.8196,0.5571
+4,top_mixed,mixed,6,0.1476,3,2026-11-11,New York Knicks,Milwaukee Bucks,Over,Total,Over 221.0,0.758,0.5153
+4,top_mixed,mixed,6,0.1476,4,2026-11-11,Sacramento Kings,Orlando Magic,Orlando Magic,ML,Orlando Magic ML,0.77,0.5234
+4,top_mixed,mixed,6,0.1476,5,2026-11-11,Philadelphia 76ers,Boston Celtics,Boston Celtics,ML,Boston Celtics ML,0.7189,0.4887
+4,top_mixed,mixed,6,0.1476,6,2026-11-11,Phoenix Suns,Los Angeles Clippers,Over,Total,Over 224.5,0.5715,0.3872
+5,ml_best,ml,3,0.4927,1,2026-11-11,Portland Trail Blazers,Oklahoma City Thunder,Oklahoma City Thunder,ML,Oklahoma City Thunder ML,0.7807,0.6899
+5,ml_best,ml,3,0.4927,2,2026-11-11,Utah Jazz,Miami Heat,Miami Heat,ML,Miami Heat ML,0.8196,0.5571
+5,ml_best,ml,3,0.4927,3,2026-11-11,Sacramento Kings,Orlando Magic,Orlando Magic,ML,Orlando Magic ML,0.77,0.5234
+6,ml_best,ml,4,0.3542,1,2026-11-11,Portland Trail Blazers,Oklahoma City Thunder,Oklahoma City Thunder,ML,Oklahoma City Thunder ML,0.7807,0.6899
+6,ml_best,ml,4,0.3542,2,2026-11-11,Utah Jazz,Miami Heat,Miami Heat,ML,Miami Heat ML,0.8196,0.5571
+6,ml_best,ml,4,0.3542,3,2026-11-11,Sacramento Kings,Orlando Magic,Orlando Magic,ML,Orlando Magic ML,0.77,0.5234
+6,ml_best,ml,4,0.3542,4,2026-11-11,Philadelphia 76ers,Boston Celtics,Boston Celtics,ML,Boston Celtics ML,0.7189,0.4887
+7,ml_best,ml,5,0.2168,1,2026-11-11,Portland Trail Blazers,Oklahoma City Thunder,Oklahoma City Thunder,ML,Oklahoma City Thunder ML,0.7807,0.6899
+7,ml_best,ml,5,0.2168,2,2026-11-11,Utah Jazz,Miami Heat,Miami Heat,ML,Miami Heat ML,0.8196,0.5571
+7,ml_best,ml,5,0.2168,3,2026-11-11,Sacramento Kings,Orlando Magic,Orlando Magic,ML,Orlando Magic ML,0.77,0.5234
+7,ml_best,ml,5,0.2168,4,2026-11-11,Philadelphia 76ers,Boston Celtics,Boston Celtics,ML,Boston Celtics ML,0.7189,0.4887
+7,ml_best,ml,5,0.2168,5,2026-11-11,Phoenix Suns,Los Angeles Clippers,Los Angeles Clippers,ML,Los Angeles Clippers ML,0.6122,0.3
+8,ml_best,ml,6,0.0443,1,2026-11-11,Portland Trail Blazers,Oklahoma City Thunder,Oklahoma City Thunder,ML,Oklahoma City Thunder ML,0.7807,0.6899
+8,ml_best,ml,6,0.0443,2,2026-11-11,Utah Jazz,Miami Heat,Miami Heat,ML,Miami Heat ML,0.8196,0.5571
+8,ml_best,ml,6,0.0443,3,2026-11-11,Sacramento Kings,Orlando Magic,Orlando Magic,ML,Orlando Magic ML,0.77,0.5234
+8,ml_best,ml,6,0.0443,4,2026-11-11,Philadelphia 76ers,Boston Celtics,Boston Celtics,ML,Boston Celtics ML,0.7189,0.4887
+8,ml_best,ml,6,0.0443,5,2026-11-11,Phoenix Suns,Los Angeles Clippers,Los Angeles Clippers,ML,Los Angeles Clippers ML,0.6122,0.3
+8,ml_best,ml,6,0.0443,6,2026-11-11,New York Knicks,Milwaukee Bucks,Milwaukee Bucks,ML,Milwaukee Bucks ML,0.2042,0.1001
+9,spread_best,spread,3,0.2775,1,2026-11-11,Portland Trail Blazers,Oklahoma City Thunder,Oklahoma City Thunder,Spread,Oklahoma City Thunder +2.0,0.7509,0.8097
+9,spread_best,spread,3,0.2775,2,2026-11-11,Philadelphia 76ers,Boston Celtics,Boston Celtics,Spread,Boston Celtics +1.0,0.5675,0.4692
+9,spread_best,spread,3,0.2775,3,2026-11-11,Sacramento Kings,Orlando Magic,Orlando Magic,Spread,Orlando Magic +6.0,0.6512,0.3894
+10,spread_best,spread,4,0.1173,1,2026-11-11,Portland Trail Blazers,Oklahoma City Thunder,Oklahoma City Thunder,Spread,Oklahoma City Thunder +2.0,0.7509,0.8097
+10,spread_best,spread,4,0.1173,2,2026-11-11,Philadelphia 76ers,Boston Celtics,Boston Celtics,Spread,Boston Celtics +1.0,0.5675,0.4692
+10,spread_best,spread,4,0.1173,3,2026-11-11,Sacramento Kings,Orlando Magic,Orlando Magic,Spread,Orlando Magic +6.0,0.6512,0.3894
+10,spread_best,spread,4,0.1173,4,2026-11-11,Phoenix Suns,Los Angeles Clippers,Phoenix Suns,Spread,Phoenix Suns -4.0,0.4228,0.2528
+11,spread_best,spread,5,0.0384,1,2026-11-11,Portland Trail Blazers,Oklahoma City Thunder,Oklahoma City Thunder,Spread,Oklahoma City Thunder +2.0,0.7509,0.8097
+11,spread_best,spread,5,0.0384,2,2026-11-11,Philadelphia 76ers,Boston Celtics,Boston Celtics,Spread,Boston Celtics +1.0,0.5675,0.4692
+11,spread_best,spread,5,0.0384,3,2026-11-11,Sacramento Kings,Orlando Magic,Orlando Magic,Spread,Orlando Magic +6.0,0.6512,0.3894
+11,spread_best,spread,5,0.0384,4,2026-11-11,Phoenix Suns,Los Angeles Clippers,Phoenix Suns,Spread,Phoenix Suns -4.0,0.4228,0.2528
+11,spread_best,spread,5,0.0384,5,2026-11-11,Utah Jazz,Miami Heat,Miami Heat,Spread,Miami Heat +8.0,0.3271,0.1956
+12,spread_best,spread,6,0.0127,1,2026-11-11,Portland Trail Blazers,Oklahoma City Thunder,Oklahoma City Thunder,Spread,Oklahoma City Thunder +2.0,0.7509,0.8097
+12,spread_best,spread,6,0.0127,2,2026-11-11,Philadelphia 76ers,Boston Celtics,Boston Celtics,Spread,Boston Celtics +1.0,0.5675,0.4692
+12,spread_best,spread,6,0.0127,3,2026-11-11,Sacramento Kings,Orlando Magic,Orlando Magic,Spread,Orlando Magic +6.0,0.6512,0.3894
+12,spread_best,spread,6,0.0127,4,2026-11-11,Phoenix Suns,Los Angeles Clippers,Phoenix Suns,Spread,Phoenix Suns -4.0,0.4228,0.2528
+12,spread_best,spread,6,0.0127,5,2026-11-11,Utah Jazz,Miami Heat,Miami Heat,Spread,Miami Heat +8.0,0.3271,0.1956
+12,spread_best,spread,6,0.0127,6,2026-11-11,New York Knicks,Milwaukee Bucks,New York Knicks,Spread,New York Knicks -15.0,0.33,0.1381
+13,total_best,total,3,0.3788,1,2026-11-11,Utah Jazz,Miami Heat,Over,Total,Over 228.5,0.8449,0.5743
+13,total_best,total,3,0.3788,2,2026-11-11,New York Knicks,Milwaukee Bucks,Over,Total,Over 221.0,0.758,0.5153
+13,total_best,total,3,0.3788,3,2026-11-11,Philadelphia 76ers,Boston Celtics,Over,Total,Over 218.0,0.5915,0.4008
+14,total_best,total,4,0.226,1,2026-11-11,Utah Jazz,Miami Heat,Over,Total,Over 228.5,0.8449,0.5743
+14,total_best,total,4,0.226,2,2026-11-11,New York Knicks,Milwaukee Bucks,Over,Total,Over 221.0,0.758,0.5153
+14,total_best,total,4,0.226,3,2026-11-11,Portland Trail Blazers,Oklahoma City Thunder,Under,Total,Under 224.5,0.5964,0.4041
+14,total_best,total,4,0.226,4,2026-11-11,Philadelphia 76ers,Boston Celtics,Over,Total,Over 218.0,0.5915,0.4008
+15,total_best,total,5,0.1291,1,2026-11-11,Utah Jazz,Miami Heat,Over,Total,Over 228.5,0.8449,0.5743
+15,total_best,total,5,0.1291,2,2026-11-11,New York Knicks,Milwaukee Bucks,Over,Total,Over 221.0,0.758,0.5153
+15,total_best,total,5,0.1291,3,2026-11-11,Portland Trail Blazers,Oklahoma City Thunder,Under,Total,Under 224.5,0.5964,0.4041
+15,total_best,total,5,0.1291,4,2026-11-11,Philadelphia 76ers,Boston Celtics,Over,Total,Over 218.0,0.5915,0.4008
+15,total_best,total,5,0.1291,5,2026-11-11,Phoenix Suns,Los Angeles Clippers,Over,Total,Over 224.5,0.5715,0.3872
