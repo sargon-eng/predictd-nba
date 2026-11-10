@@ -1,0 +1,22 @@
+# ---- Core data stack ----
+pandas
+numpy
+scipy
+
+# ---- NBA data ----
+nba_api
+requests
+
+# ---- Modeling ----
+scikit-learn
+joblib
+
+# ---- Dashboard ----
+streamlit
+plotly
+
+# ---- Config / secrets ----
+python-dotenv
+
+# ---- Utilities ----
+tqdm
