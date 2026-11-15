@@ -1,0 +1,5 @@
+commence_time,season,home_team,away_team,bookmaker,model_home_win_prob,model_away_win_prob,market_home_ml,market_away_ml,market_home_prob,market_away_prob,ml_edge,ml_pick,model_margin,market_spread,spread_edge,spread_pick,model_total,market_total,total_edge,total_pick
+2026-11-01 20:40:00+00:00,2026-27,Orlando Magic,Boston Celtics,pinnacle,0.3309,0.6691,226,-259,0.2983,0.7017,0.0326,HOME,-5.65,6.5,-12.15,AWAY,212.06,221.0,-8.94,UNDER
+2026-11-01 22:10:00+00:00,2026-27,Indiana Pacers,Brooklyn Nets,pinnacle,0.5131,0.4869,-167,150,0.6099,0.3901,0.0969,AWAY,6.64,-3.5,10.14,HOME,223.06,230.5,-7.44,UNDER
+2026-11-02 01:40:00+00:00,2026-27,Golden State Warriors,Los Angeles Clippers,pinnacle,0.3547,0.6453,-124,113,0.5411,0.4589,0.1864,AWAY,0.52,-2.5,3.02,HOME,236.09,221.0,15.09,OVER
+2026-11-02 02:10:00+00:00,2026-27,Los Angeles Lakers,Toronto Raptors,pinnacle,0.5259,0.4741,-141,127,0.5705,0.4295,0.0446,AWAY,2.16,-3.0,5.16,HOME,220.15,225.5,-5.35,UNDER

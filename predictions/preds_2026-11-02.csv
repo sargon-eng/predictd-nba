@@ -1,0 +1,16 @@
+commence_time,season,home_team,away_team,bookmaker,model_home_win_prob,model_away_win_prob,market_home_ml,market_away_ml,market_home_prob,market_away_prob,ml_edge,ml_pick,model_margin,market_spread,spread_edge,spread_pick,model_total,market_total,total_edge,total_pick
+2026-11-03 00:10:00+00:00,2026-27,Cleveland Cavaliers,Oklahoma City Thunder,pinnacle,0.3291,0.6709,-167,150,0.6099,0.3901,0.2808,AWAY,-9.81,-4.0,-5.81,AWAY,216.03,230.0,-13.97,UNDER
+2026-11-03 00:40:00+00:00,2026-27,Indiana Pacers,Atlanta Hawks,pinnacle,0.2922,0.7078,179,-206,0.3474,0.6526,0.0552,AWAY,-14.44,5.0,-19.44,AWAY,230.07,232.0,,PASS
+2026-11-03 00:40:00+00:00,2026-27,New York Knicks,Brooklyn Nets,pinnacle,0.9007,0.0993,-1104,777,0.8894,0.1106,,PASS,18.97,-15.0,33.97,HOME,220.96,219.5,,PASS
+2026-11-03 00:40:00+00:00,2026-27,Charlotte Hornets,Detroit Pistons,pinnacle,0.3151,0.6849,169,-189,0.3624,0.6376,0.0474,AWAY,-4.62,5.0,-9.62,AWAY,222.03,210.5,11.53,OVER
+2026-11-03 00:40:00+00:00,2026-27,Philadelphia 76ers,Chicago Bulls,pinnacle,0.5525,0.4475,-548,419,0.8144,0.1856,0.262,AWAY,5.5,-10.5,16.0,HOME,228.73,238.5,-9.77,UNDER
+2026-11-03 00:40:00+00:00,2026-27,Orlando Magic,Washington Wizards,pinnacle,0.7732,0.2268,-145,131,0.5775,0.4225,0.1956,HOME,9.05,-2.5,11.55,HOME,220.72,225.5,-4.78,UNDER
+2026-11-03 01:10:00+00:00,2026-27,Dallas Mavericks,Sacramento Kings,pinnacle,0.4616,0.5384,-436,346,0.7839,0.2161,0.3223,AWAY,7.19,-10.5,17.69,HOME,235.52,232.0,3.52,OVER
+2026-11-03 01:10:00+00:00,2026-27,Memphis Grizzlies,New Orleans Pelicans,pinnacle,0.2479,0.7521,-191,170,0.6393,0.3607,0.3914,AWAY,-3.51,-5.0,,PASS,252.75,234.0,18.75,OVER
+2026-11-03 01:10:00+00:00,2026-27,Minnesota Timberwolves,Milwaukee Bucks,pinnacle,0.5998,0.4002,-470,383,0.7993,0.2007,0.1995,AWAY,4.3,-11.5,15.8,HOME,239.68,233.5,6.18,OVER
+2026-11-03 01:40:00+00:00,2026-27,Houston Rockets,Boston Celtics,pinnacle,0.3936,0.6064,-188,168,0.6363,0.3637,0.2427,AWAY,-4.81,-5.0,,PASS,206.24,218.5,-12.26,UNDER
+2026-11-03 01:40:00+00:00,2026-27,San Antonio Spurs,Utah Jazz,pinnacle,0.8954,0.1046,-1024,732,0.8834,0.1166,,PASS,8.05,-16.0,24.05,HOME,214.3,230.5,-16.2,UNDER
+2026-11-03 02:10:00+00:00,2026-27,Denver Nuggets,Portland Trail Blazers,pinnacle,0.5968,0.4032,-169,151,0.6119,0.3881,,PASS,3.66,-4.0,7.66,HOME,225.59,230.5,-4.91,UNDER
+2026-11-03 03:10:00+00:00,2026-27,Golden State Warriors,Phoenix Suns,pinnacle,0.4,0.6,-146,131,0.5782,0.4218,0.1782,AWAY,-2.51,-3.0,,PASS,237.15,228.0,9.15,OVER
+2026-11-03 03:10:00+00:00,2026-27,Los Angeles Clippers,Toronto Raptors,pinnacle,0.4161,0.5839,175,-197,0.3541,0.6459,0.062,HOME,-5.05,5.0,-10.05,AWAY,223.05,221.5,,PASS
+2026-11-03 03:10:00+00:00,2026-27,Los Angeles Lakers,Miami Heat,pinnacle,0.5343,0.4657,-125,113,0.542,0.458,,PASS,11.84,-2.0,13.84,HOME,228.4,236.5,-8.1,UNDER

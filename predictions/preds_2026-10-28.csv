@@ -1,0 +1,13 @@
+commence_time,season,home_team,away_team,bookmaker,model_home_win_prob,model_away_win_prob,market_home_ml,market_away_ml,market_home_prob,market_away_prob,ml_edge,ml_pick,model_margin,market_spread,spread_edge,spread_pick,model_total,market_total,total_edge,total_pick
+2026-10-28 23:10:00+00:00,2026-27,Atlanta Hawks,Miami Heat,pinnacle,0.3597,0.6403,-128,116,0.548,0.452,0.1883,AWAY,4.03,-2.0,6.03,HOME,230.24,241.5,-11.26,UNDER
+2026-10-28 23:10:00+00:00,2026-27,Detroit Pistons,Charlotte Hornets,pinnacle,0.5985,0.4015,-281,243,0.7167,0.2833,0.1182,AWAY,4.73,-7.5,12.23,HOME,226.3,214.5,11.8,OVER
+2026-10-28 23:10:00+00:00,2026-27,Cleveland Cavaliers,Washington Wizards,pinnacle,0.838,0.162,-370,311,0.7639,0.2361,0.0741,HOME,10.17,-10.0,20.17,HOME,226.43,238.5,-12.07,UNDER
+2026-10-28 23:10:00+00:00,2026-27,Indiana Pacers,Philadelphia 76ers,pinnacle,0.273,0.727,182,-210,0.3436,0.6564,0.0706,AWAY,-15.64,5.5,-21.14,AWAY,225.42,235.5,-10.08,UNDER
+2026-10-28 23:40:00+00:00,2026-27,Toronto Raptors,Orlando Magic,pinnacle,0.4702,0.5298,-191,171,0.6401,0.3599,0.1699,AWAY,-0.34,-4.5,4.16,HOME,212.55,223.5,-10.95,UNDER
+2026-10-29 00:10:00+00:00,2026-27,Chicago Bulls,New York Knicks,pinnacle,0.1547,0.8453,226,-260,0.2981,0.7019,0.1435,AWAY,-14.0,7.0,-21.0,AWAY,227.3,231.5,-4.2,UNDER
+2026-10-29 00:10:00+00:00,2026-27,New Orleans Pelicans,Denver Nuggets,pinnacle,0.2412,0.7588,166,-186,0.3663,0.6337,0.1252,AWAY,-14.97,5.0,-19.97,AWAY,236.33,241.0,-4.67,UNDER
+2026-10-29 00:10:00+00:00,2026-27,Minnesota Timberwolves,Golden State Warriors,pinnacle,0.5589,0.4411,-166,149,0.6084,0.3916,0.0495,AWAY,2.31,-3.5,5.81,HOME,229.99,228.5,,PASS
+2026-10-29 00:10:00+00:00,2026-27,Milwaukee Bucks,Houston Rockets,pinnacle,0.2628,0.7372,276,-323,0.2583,0.7417,,PASS,-9.25,8.0,-17.25,AWAY,220.35,226.0,-5.65,UNDER
+2026-10-29 01:10:00+00:00,2026-27,Utah Jazz,San Antonio Spurs,pinnacle,0.0913,0.9087,465,-623,0.1704,0.8296,0.0791,AWAY,-10.75,13.0,-23.75,AWAY,236.91,233.5,3.41,OVER
+2026-10-29 01:40:00+00:00,2026-27,Dallas Mavericks,Oklahoma City Thunder,pinnacle,0.1357,0.8643,189,-219,0.3351,0.6649,0.1994,AWAY,-14.76,6.0,-20.76,AWAY,225.17,228.5,-3.33,UNDER
+2026-10-29 02:40:00+00:00,2026-27,Los Angeles Clippers,Los Angeles Lakers,pinnacle,0.368,0.632,146,-162,0.3967,0.6033,,PASS,-4.51,4.0,-8.51,AWAY,225.22,228.0,,PASS

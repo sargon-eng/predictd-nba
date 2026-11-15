@@ -3,7 +3,7 @@ Track prediction accuracy against actual NBA results.
 
 Reads:  predictions/preds_*.csv        (all archived predictions)
         predictions/bet_slips_*.csv    (bet slip CSVs, new)
-Fetches: nba_api LeagueGameFinder for recent dates only
+Fetches: nba_api LeagueGameFinder for recent dates only (with retries)
 Writes: predictions/tracked.csv        (one row per resolved game)
         logs/bet_slip_accuracy.csv     (one row per fully-resolved slip, new)
 
@@ -14,6 +14,7 @@ Run:
 from __future__ import annotations
 
 import glob
+import time
 from pathlib import Path
 
 import numpy as np
@@ -37,6 +38,14 @@ LOGS_DIR.mkdir(parents=True, exist_ok=True)
 
 TRACKED_PATH = PRED_DIR / "tracked.csv"
 BET_SLIP_ACC_PATH = LOGS_DIR / "bet_slip_accuracy.csv"
+
+
+# ---------------------------------------------------------------------------
+# NBA API CONFIG
+# ---------------------------------------------------------------------------
+NBA_TIMEOUT_SECONDS = 60
+NBA_MAX_RETRIES = 3
+NBA_RETRY_BACKOFF = 5
 
 
 # ---------------------------------------------------------------------------
@@ -78,8 +87,19 @@ def load_all_predictions() -> pd.DataFrame:
 
 
 # ---------------------------------------------------------------------------
-# FETCH ACTUAL RESULTS
+# FETCH ACTUAL RESULTS (with retries)
 # ---------------------------------------------------------------------------
+def _call_league_game_finder(date_from: str, date_to: str) -> pd.DataFrame:
+    """Single call to nba_api. Raises on failure."""
+    finder = leaguegamefinder.LeagueGameFinder(
+        date_from_nullable=date_from,
+        date_to_nullable=date_to,
+        league_id_nullable="00",
+        timeout=NBA_TIMEOUT_SECONDS,
+    )
+    return finder.get_data_frames()[0]
+
+
 def fetch_recent_results(dates: list) -> pd.DataFrame:
     if not dates:
         return pd.DataFrame()
@@ -89,13 +109,33 @@ def fetch_recent_results(dates: list) -> pd.DataFrame:
     date_from = min_d.strftime("%m/%d/%Y")
     date_to = max_d.strftime("%m/%d/%Y")
 
-    print(f"  querying nba_api for {date_from} -> {date_to} ...")
-    finder = leaguegamefinder.LeagueGameFinder(
-        date_from_nullable=date_from,
-        date_to_nullable=date_to,
-        league_id_nullable="00",
-    )
-    raw = finder.get_data_frames()[0]
+    print(f"  querying nba_api for {date_from} -> {date_to} "
+          f"(timeout={NBA_TIMEOUT_SECONDS}s, max {NBA_MAX_RETRIES} attempts) ...")
+
+    raw = None
+    last_err = None
+    for attempt in range(1, NBA_MAX_RETRIES + 1):
+        try:
+            raw = _call_league_game_finder(date_from, date_to)
+            print(f"  attempt {attempt}/{NBA_MAX_RETRIES}: success "
+                  f"({len(raw)} rows)")
+            break
+        except Exception as e:
+            last_err = e
+            print(f"  attempt {attempt}/{NBA_MAX_RETRIES}: "
+                  f"{type(e).__name__}: {str(e)[:120]}")
+            if attempt < NBA_MAX_RETRIES:
+                wait = NBA_RETRY_BACKOFF * attempt
+                print(f"  retrying in {wait}s ...")
+                time.sleep(wait)
+
+    if raw is None:
+        print(f"  all {NBA_MAX_RETRIES} attempts failed. "
+              f"stats.nba.com may be down or rate-limiting.")
+        print(f"  last error: {type(last_err).__name__}: {last_err}")
+        print(f"  TIP: try again in a few minutes, or reduce the date window.")
+        return pd.DataFrame()
+
     if raw.empty:
         return pd.DataFrame()
 
@@ -256,10 +296,6 @@ def summarize(df: pd.DataFrame) -> None:
 # BET SLIP ACCURACY (NEW SECTION)
 # ===========================================================================
 def _slip_pick_correct(pick_row, tracked_df: pd.DataFrame):
-    """Return True/False if pick is correct, or None if not resolvable.
-
-    Uses CORRECT spread/total formulas (unlike the existing track flow above).
-    """
     pick_market = pick_row["Market_Type"]
     team = pick_row["Team"]
     home = pick_row["HomeTeam"]
@@ -273,7 +309,6 @@ def _slip_pick_correct(pick_row, tracked_df: pd.DataFrame):
     if match.empty:
         return None
 
-    # Filter to matching UTC date
     match["_utc_date"] = match["commence_time"].dt.strftime("%Y-%m-%d")
     date_match = match[match["_utc_date"] == game_date]
     if date_match.empty:
@@ -293,8 +328,7 @@ def _slip_pick_correct(pick_row, tracked_df: pd.DataFrame):
         if pd.isna(row.get("actual_margin")) or pd.isna(row.get("market_spread")):
             return None
         margin = float(row["actual_margin"])
-        line = float(row["market_spread"])  # home-side line
-        # home covers iff margin + line > 0  (line = -4.5 -> covers if margin > 4.5)
+        line = float(row["market_spread"])
         home_covers = (margin + line) > 0
         return home_covers if team == home else (not home_covers)
 
@@ -309,15 +343,13 @@ def _slip_pick_correct(pick_row, tracked_df: pd.DataFrame):
 
 
 def track_bet_slips(tracked_df: pd.DataFrame) -> pd.DataFrame:
-    """Evaluate every bet_slips_*.csv. A slip is scored only if ALL picks
-    have resolved. Returns DataFrame of resolved slips."""
     bet_files = sorted(glob.glob(str(PRED_DIR / "bet_slips_*.csv")))
     if not bet_files:
         return pd.DataFrame()
 
     results = []
     for f in bet_files:
-        fname = Path(f).name  # bet_slips_YYYYMMDD.csv
+        fname = Path(f).name
         try:
             stamp = fname.replace("bet_slips_", "").replace(".csv", "")
             slip_date = f"{stamp[:4]}-{stamp[4:6]}-{stamp[6:8]}"
@@ -413,7 +445,6 @@ def print_bet_slip_summary(df: pd.DataFrame) -> None:
 
 
 def append_bet_slip_accuracy() -> None:
-    """Called from main() AFTER the existing accuracy flow."""
     try:
         if not TRACKED_PATH.exists():
             print("\n(skipping bet slip accuracy — no tracked.csv yet)")
@@ -446,8 +477,6 @@ def main() -> int:
 
     if eligible.empty:
         print("\nNo games have finished yet. Run again later.")
-        # Even with no new results, we can still re-evaluate existing bet slips
-        # against tracked.csv, so don't return early.
         append_bet_slip_accuracy()
         return 0
 
@@ -455,6 +484,7 @@ def main() -> int:
     results = fetch_recent_results(dates)
     if results.empty:
         print("  no results returned from nba_api (games may not be in the DB yet)")
+        print("  (bet slip accuracy will still be evaluated against existing tracked.csv)")
         append_bet_slip_accuracy()
         return 0
     print(f"  fetched {len(results)} actual results")
@@ -479,7 +509,6 @@ def main() -> int:
 
     summarize(out)
 
-    # ------- NEW: bet slip accuracy section -------
     append_bet_slip_accuracy()
 
     print(f"\n[done] track_accuracy complete.")

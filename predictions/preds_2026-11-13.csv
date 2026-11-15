@@ -1,0 +1,10 @@
+commence_time,season,home_team,away_team,bookmaker,model_home_win_prob,model_away_win_prob,market_home_ml,market_away_ml,market_home_prob,market_away_prob,ml_edge,ml_pick,model_margin,market_spread,spread_edge,spread_pick,model_total,market_total,total_edge,total_pick
+2026-11-14 00:10:00+00:00,2026-27,Indiana Pacers,New York Knicks,pinnacle,0.1237,0.8763,258,-310,0.2698,0.7302,0.1461,AWAY,-15.4,8.5,-23.9,AWAY,217.03,218.5,,PASS
+2026-11-14 00:10:00+00:00,2026-27,Orlando Magic,Milwaukee Bucks,pinnacle,0.5751,0.4249,-351,297,0.7555,0.2445,0.1804,AWAY,4.94,-9.0,13.94,HOME,233.31,224.0,9.31,OVER
+2026-11-14 01:10:00+00:00,2026-27,Chicago Bulls,Atlanta Hawks,pinnacle,0.3289,0.6711,233,-277,0.2901,0.7099,0.0388,HOME,-6.95,7.0,-13.95,AWAY,241.49,246.5,-5.01,UNDER
+2026-11-14 01:10:00+00:00,2026-27,Miami Heat,Cleveland Cavaliers,pinnacle,0.4018,0.5982,-133,121,0.5578,0.4422,0.156,AWAY,-3.09,-2.5,,PASS,224.9,235.0,-10.1,UNDER
+2026-11-14 01:10:00+00:00,2026-27,New Orleans Pelicans,Memphis Grizzlies,pinnacle,0.5708,0.4292,118,-131,0.4472,0.5528,0.1237,HOME,1.4,2.5,,PASS,248.52,236.5,12.02,OVER
+2026-11-14 01:40:00+00:00,2026-27,Houston Rockets,Utah Jazz,pinnacle,0.7719,0.2281,-1179,819,0.8944,0.1056,0.1225,AWAY,11.22,-16.0,27.22,HOME,209.49,221.0,-11.51,UNDER
+2026-11-14 02:40:00+00:00,2026-27,San Antonio Spurs,Golden State Warriors,pinnacle,0.7806,0.2194,-582,440,0.8217,0.1783,0.0411,AWAY,5.72,-11.5,17.22,HOME,218.49,218.5,,PASS
+2026-11-14 03:10:00+00:00,2026-27,Sacramento Kings,Portland Trail Blazers,pinnacle,0.2489,0.7511,362,-440,0.2099,0.7901,0.039,HOME,-8.87,10.5,-19.37,AWAY,225.76,228.5,,PASS
+2026-11-14 03:40:00+00:00,2026-27,Los Angeles Clippers,Oklahoma City Thunder,pinnacle,0.2359,0.7641,232,-267,0.2928,0.7072,0.0569,AWAY,-14.99,7.0,-21.99,AWAY,224.44,222.5,,PASS

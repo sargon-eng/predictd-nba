@@ -1,0 +1,6 @@
+commence_time,season,home_team,away_team,bookmaker,model_home_win_prob,model_away_win_prob,market_home_ml,market_away_ml,market_home_prob,market_away_prob,ml_edge,ml_pick,model_margin,market_spread,spread_edge,spread_pick,model_total,market_total,total_edge,total_pick
+2026-10-27 23:40:00+00:00,2026-27,Boston Celtics,Brooklyn Nets,pinnacle,0.8589,0.1411,-524,420,0.8137,0.1863,0.0453,HOME,16.11,-11.5,27.61,HOME,215.43,222.5,-7.07,UNDER
+2026-10-28 00:10:00+00:00,2026-27,New York Knicks,Detroit Pistons,pinnacle,0.5662,0.4338,-164,148,0.6064,0.3936,0.0402,AWAY,5.34,-4.0,9.34,HOME,220.37,219.0,,PASS
+2026-10-28 00:10:00+00:00,2026-27,San Antonio Spurs,Sacramento Kings,pinnacle,0.864,0.136,-1351,911,0.904,0.096,0.04,AWAY,12.32,-18.5,30.82,HOME,226.6,232.0,-5.4,UNDER
+2026-10-28 03:10:00+00:00,2026-27,Los Angeles Lakers,Portland Trail Blazers,pinnacle,0.5747,0.4253,-121,110,0.5348,0.4652,0.0398,HOME,1.04,-2.0,3.04,HOME,223.88,234.0,-10.12,UNDER
+2026-10-28 23:10:00+00:00,2026-27,Indiana Pacers,Philadelphia 76ers,fanduel,0.273,0.727,108,-126,0.463,0.537,0.19,AWAY,-15.64,1.5,-17.14,AWAY,225.42,238.5,-13.08,UNDER

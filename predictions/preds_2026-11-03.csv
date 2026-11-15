@@ -1,0 +1,6 @@
+commence_time,season,home_team,away_team,bookmaker,model_home_win_prob,model_away_win_prob,market_home_ml,market_away_ml,market_home_prob,market_away_prob,ml_edge,ml_pick,model_margin,market_spread,spread_edge,spread_pick,model_total,market_total,total_edge,total_pick
+2026-11-05 00:10:00+00:00,2026-27,Detroit Pistons,Philadelphia 76ers,fanduel,0.6372,0.3628,-120,102,0.5242,0.4758,0.113,HOME,6.72,-1.5,8.22,HOME,224.21,218.5,5.71,OVER
+2026-11-05 00:40:00+00:00,2026-27,Brooklyn Nets,Charlotte Hornets,fanduel,0.1411,0.8589,118,-138,0.4417,0.5583,0.3006,AWAY,-13.22,2.5,-15.72,AWAY,228.21,214.5,13.71,OVER
+2026-11-05 01:10:00+00:00,2026-27,Oklahoma City Thunder,Cleveland Cavaliers,fanduel,0.6703,0.3297,-144,122,0.5671,0.4329,0.1032,HOME,7.15,-2.5,9.65,HOME,220.67,228.5,-7.83,UNDER
+2026-11-05 01:40:00+00:00,2026-27,Houston Rockets,Minnesota Timberwolves,fanduel,0.5067,0.4933,-360,290,0.7532,0.2468,0.2465,AWAY,-6.97,-9.5,2.53,HOME,209.97,222.5,-12.53,UNDER
+2026-11-05 02:40:00+00:00,2026-27,San Antonio Spurs,Dallas Mavericks,fanduel,0.8298,0.1702,-590,440,0.822,0.178,,PASS,9.23,-12.5,21.73,HOME,230.57,229.5,,PASS

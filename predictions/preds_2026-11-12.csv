@@ -1,0 +1,5 @@
+commence_time,season,home_team,away_team,bookmaker,model_home_win_prob,model_away_win_prob,market_home_ml,market_away_ml,market_home_prob,market_away_prob,ml_edge,ml_pick,model_margin,market_spread,spread_edge,spread_pick,model_total,market_total,total_edge,total_pick
+2026-11-13 00:10:00+00:00,2026-27,Washington Wizards,Detroit Pistons,pinnacle,0.0905,0.9095,356,-432,0.2126,0.7874,0.1221,AWAY,-19.68,10.5,-30.18,AWAY,226.89,220.5,6.39,OVER
+2026-11-13 00:10:00+00:00,2026-27,Philadelphia 76ers,Toronto Raptors,pinnacle,0.3789,0.6211,-342,281,0.7467,0.2533,0.3678,AWAY,-3.88,-8.5,4.62,HOME,223.32,223.5,,PASS
+2026-11-13 01:10:00+00:00,2026-27,Minnesota Timberwolves,Dallas Mavericks,pinnacle,0.6148,0.3852,-214,190,0.664,0.336,0.0493,AWAY,8.21,-6.0,14.21,HOME,235.25,226.5,8.75,OVER
+2026-11-13 02:10:00+00:00,2026-27,Phoenix Suns,Charlotte Hornets,pinnacle,0.3784,0.6216,-225,193,0.6698,0.3302,0.2914,AWAY,-0.24,-6.5,6.26,HOME,226.56,214.5,12.06,OVER

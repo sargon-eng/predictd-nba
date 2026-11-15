@@ -27,7 +27,6 @@ import plotly.graph_objects as go
 import streamlit as st
 
 # --- [SECRETS HANDLING] ---
-# Try to load from Streamlit Cloud secrets first, fall back to local .env
 try:
     from dotenv import load_dotenv
     load_dotenv()
@@ -35,12 +34,10 @@ except ImportError:
     pass
 
 def get_api_key():
-    """Get API key from Streamlit secrets (cloud) or environment (local)."""
     if "ODDS_API_KEY" in st.secrets:
         return st.secrets["ODDS_API_KEY"]
     return os.getenv("ODDS_API_KEY", "")
 
-# Store it so other modules can access it if needed
 API_KEY = get_api_key()
 
 # ---------------------------------------------------------------------------
@@ -68,10 +65,14 @@ st.set_page_config(
 # HELPERS
 # ---------------------------------------------------------------------------
 def file_status(path: Path) -> tuple:
-    if not path.exists():
+    if not path or not path.exists():
         return "🔴", "missing"
     mtime = datetime.fromtimestamp(path.stat().st_mtime)
     return "🟢", mtime.strftime("%Y-%m-%d %H:%M")
+
+def pending_status() -> tuple:
+    """Status for files that don't exist yet but are expected to populate."""
+    return "🟡", "awaiting results"
 
 def run_pipeline_step(script_name: str) -> tuple:
     script_path = SRC / script_name
@@ -127,6 +128,10 @@ def find_latest_bet_slip_file() -> Path | None:
     files = sorted(glob.glob(str(PRED_DIR / "bet_slips_*.csv")))
     return Path(files[-1]) if files else None
 
+def find_latest_monitor_log() -> Path | None:
+    files = sorted(glob.glob(str(LOGS_DIR / "monitor_*.log")))
+    return Path(files[-1]) if files else None
+
 def bet_slip_status_dot(combined_prob: float) -> str:
     if combined_prob >= 0.5:
         return "🟢"
@@ -154,16 +159,31 @@ with st.sidebar:
     st.header("System status")
 
     latest_bs = find_latest_bet_slip_file()
+    latest_log = find_latest_monitor_log()
+
+    # Items that MUST exist
     for label, path in [
         ("latest predictions", LATEST_CSV),
         ("tracked results", TRACKED_CSV),
-        ("latest bet slips", latest_bs if latest_bs else PRED_DIR / "__none__"),
-        ("bet slip accuracy", BET_SLIP_ACC_CSV),
-        ("monitor log", LOGS_DIR / f"monitor_{datetime.now().strftime('%Y-%m-%d')}.log"),
+        ("latest bet slips", latest_bs),
+        ("latest monitor log", latest_log),
     ]:
-        emoji, when = file_status(path)
+        if path is None:
+            emoji, when = "🔴", "missing"
+        else:
+            emoji, when = file_status(path)
+            if path is not None:
+                when = path.name + "\n" + when
         st.markdown(f"{emoji} **{label}**  \n<small>{when}</small>",
                     unsafe_allow_html=True)
+
+    # Bet slip accuracy is EXPECTED to be missing until slips resolve
+    if BET_SLIP_ACC_CSV.exists():
+        emoji, when = file_status(BET_SLIP_ACC_CSV)
+    else:
+        emoji, when = pending_status()
+    st.markdown(f"{emoji} **bet slip accuracy**  \n<small>{when}</small>",
+                unsafe_allow_html=True)
 
     st.divider()
     st.header("Actions")
@@ -202,12 +222,14 @@ with st.sidebar:
     st.divider()
     st.caption(f"Project: `{ROOT.name}`  \nBuilt: {datetime.now():%Y-%m-%d}")
 
+
 # ---------------------------------------------------------------------------
 # TABS
 # ---------------------------------------------------------------------------
 tab_picks, tab_history, tab_accuracy, tab_betslips, tab_monitor = st.tabs(
     ["📅 Today's Picks", "📜 History", "📈 Accuracy", "🎫 Bet Slips", "🩺 Monitor"]
 )
+
 
 # ===========================================================================
 # TAB 1 — TODAY'S PICKS
@@ -309,6 +331,7 @@ with tab_picks:
                         else:
                             st.markdown("*No edge — PASS*")
 
+
 # ===========================================================================
 # TAB 2 — HISTORY
 # ===========================================================================
@@ -346,6 +369,7 @@ with tab_history:
 
         st.caption(f"Total resolved: **{len(v)}**  ·  "
                    f"ML wins: **{int(tracked['ml_correct'].sum()) if 'ml_correct' in tracked else 0}**")
+
 
 # ===========================================================================
 # TAB 3 — ACCURACY
@@ -467,8 +491,9 @@ with tab_accuracy:
                                    coloraxis_showscale=False)
                 st.plotly_chart(fig3, use_container_width=True)
 
+
 # ===========================================================================
-# TAB 4 — BET SLIPS (NEW)
+# TAB 4 — BET SLIPS
 # ===========================================================================
 with tab_betslips:
     st.subheader("🎫 Bet Slips")
@@ -675,6 +700,7 @@ with tab_betslips:
             )
             st.dataframe(styled_tbl, use_container_width=True, hide_index=True)
 
+
 # ===========================================================================
 # TAB 5 — MONITOR
 # ===========================================================================
@@ -703,6 +729,7 @@ with tab_monitor:
 
         with st.expander("Full log", expanded=True):
             st.code(content, language="text")
+
 
 # ---------------------------------------------------------------------------
 # FOOTER

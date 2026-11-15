@@ -1,0 +1,11 @@
+commence_time,season,home_team,away_team,bookmaker,model_home_win_prob,model_away_win_prob,market_home_ml,market_away_ml,market_home_prob,market_away_prob,ml_edge,ml_pick,model_margin,market_spread,spread_edge,spread_pick,model_total,market_total,total_edge,total_pick
+2026-11-12 00:10:00+00:00,2026-27,Toronto Raptors,Boston Celtics,pinnacle,0.3363,0.6637,192,-217,0.3335,0.6665,,PASS,-3.89,6.0,-9.89,AWAY,214.45,216.0,,PASS
+2026-11-12 00:10:00+00:00,2026-27,New York Knicks,Cleveland Cavaliers,pinnacle,0.6182,0.3818,-181,162,0.6279,0.3721,,PASS,4.89,-4.0,8.89,HOME,223.16,223.0,,PASS
+2026-11-12 00:10:00+00:00,2026-27,Indiana Pacers,Washington Wizards,pinnacle,0.5287,0.4713,-145,131,0.5775,0.4225,0.0489,AWAY,2.12,-3.0,5.12,HOME,230.45,228.0,,PASS
+2026-11-12 01:10:00+00:00,2026-27,New Orleans Pelicans,Brooklyn Nets,pinnacle,0.5988,0.4012,-186,166,0.6337,0.3663,0.0349,AWAY,10.31,-4.5,14.81,HOME,228.82,229.0,,PASS
+2026-11-12 01:10:00+00:00,2026-27,Chicago Bulls,San Antonio Spurs,pinnacle,0.1484,0.8516,743,-1043,0.115,0.885,0.0334,HOME,-8.67,14.5,-23.17,AWAY,232.38,239.5,-7.12,UNDER
+2026-11-12 01:10:00+00:00,2026-27,Memphis Grizzlies,Denver Nuggets,pinnacle,0.1171,0.8829,148,-164,0.3936,0.6064,0.2765,AWAY,-26.08,3.5,-29.58,AWAY,243.07,230.5,12.57,OVER
+2026-11-12 01:10:00+00:00,2026-27,Milwaukee Bucks,Los Angeles Lakers,pinnacle,0.2432,0.7568,562,-791,0.1454,0.8546,0.0978,HOME,-11.38,14.5,-25.88,AWAY,226.29,229.5,-3.21,UNDER
+2026-11-12 02:10:00+00:00,2026-27,Utah Jazz,Orlando Magic,pinnacle,0.1858,0.8142,132,-149,0.4187,0.5813,0.2329,AWAY,-9.75,3.5,-13.25,AWAY,236.14,215.5,20.64,OVER
+2026-11-12 02:40:00+00:00,2026-27,Houston Rockets,Golden State Warriors,pinnacle,0.6048,0.3952,-246,215,0.6913,0.3087,0.0865,AWAY,2.46,-6.0,8.46,HOME,216.06,220.5,-4.44,UNDER
+2026-11-12 03:10:00+00:00,2026-27,Portland Trail Blazers,Oklahoma City Thunder,pinnacle,0.2188,0.7812,-102,-108,0.493,0.507,0.2742,AWAY,-12.16,1.0,-13.16,AWAY,219.69,225.5,-5.81,UNDER

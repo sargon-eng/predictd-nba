@@ -1,0 +1,24 @@
+commence_time,season,home_team,away_team,bookmaker,model_home_win_prob,model_away_win_prob,market_home_ml,market_away_ml,market_home_prob,market_away_prob,ml_edge,ml_pick,model_margin,market_spread,spread_edge,spread_pick,model_total,market_total,total_edge,total_pick
+2026-10-22 23:10:00+00:00,2026-27,Philadelphia 76ers,Cleveland Cavaliers,pinnacle,0.3521,0.6479,-135,125,0.5638,0.4362,0.2117,AWAY,-4.31,-2.5,,PASS,224.31,237.5,-13.19,UNDER
+2026-10-23 01:40:00+00:00,2026-27,Oklahoma City Thunder,Denver Nuggets,pinnacle,0.6383,0.3617,-307,271,0.7367,0.2633,0.0985,AWAY,8.51,-8.5,17.01,HOME,222.33,236.5,-14.17,UNDER
+2026-10-23 20:10:00+00:00,2026-27,Milwaukee Bucks,Chicago Bulls,pinnacle,0.44,0.56,-110,-104,0.5068,0.4932,0.0668,AWAY,1.86,-1.0,2.86,HOME,235.18,238.5,-3.32,UNDER
+2026-10-23 23:10:00+00:00,2026-27,Charlotte Hornets,Atlanta Hawks,pinnacle,0.4905,0.5095,115,-132,0.4498,0.5502,0.0408,HOME,-2.99,3.5,-6.49,AWAY,230.85,225.5,5.35,OVER
+2026-10-23 23:10:00+00:00,2026-27,Boston Celtics,New York Knicks,pinnacle,0.4245,0.5755,-128,111,0.5422,0.4578,0.1178,AWAY,-2.38,-2.0,,PASS,207.3,224.5,-17.2,UNDER
+2026-10-23 23:10:00+00:00,2026-27,Indiana Pacers,Dallas Mavericks,pinnacle,0.3651,0.6349,-218,184,0.6607,0.3393,0.2956,AWAY,-4.1,-6.0,,PASS,233.52,237.0,-3.48,UNDER
+2026-10-23 23:10:00+00:00,2026-27,Orlando Magic,Minnesota Timberwolves,pinnacle,0.4457,0.5543,107,-120,0.4697,0.5303,,PASS,-6.57,1.5,-8.07,AWAY,218.65,239.5,-20.85,UNDER
+2026-10-23 23:10:00+00:00,2026-27,Washington Wizards,Toronto Raptors,pinnacle,0.1435,0.8565,162,-190,0.3681,0.6319,0.2246,AWAY,-22.46,5.0,-27.46,AWAY,228.31,236.0,-7.69,UNDER
+2026-10-24 00:10:00+00:00,2026-27,Miami Heat,Detroit Pistons,pinnacle,0.3584,0.6416,-128,113,0.5446,0.4554,0.1862,AWAY,-6.42,-2.5,-3.92,AWAY,229.75,238.0,-8.25,UNDER
+2026-10-24 01:40:00+00:00,2026-27,San Antonio Spurs,Houston Rockets,pinnacle,0.6655,0.3345,-227,190,0.6681,0.3319,,PASS,7.36,-6.5,13.86,HOME,214.52,227.5,-12.98,UNDER
+2026-10-24 01:40:00+00:00,2026-27,Utah Jazz,New Orleans Pelicans,pinnacle,0.2764,0.7236,-161,139,0.5958,0.4042,0.3195,AWAY,6.39,-4.0,10.39,HOME,251.07,241.5,9.57,OVER
+2026-10-24 02:10:00+00:00,2026-27,Sacramento Kings,Portland Trail Blazers,pinnacle,0.2591,0.7409,252,-312,0.2728,0.7272,,PASS,-12.73,7.0,-19.73,AWAY,227.0,233.0,-6.0,UNDER
+2026-10-24 02:10:00+00:00,2026-27,Golden State Warriors,Memphis Grizzlies,pinnacle,0.631,0.369,-162,140,0.5974,0.4026,0.0336,HOME,7.05,-4.0,11.05,HOME,248.8,234.0,14.8,OVER
+2026-10-24 02:10:00+00:00,2026-27,Los Angeles Lakers,Los Angeles Clippers,pinnacle,0.5433,0.4567,-431,331,0.7777,0.2223,0.2343,AWAY,3.31,-10.0,13.31,HOME,224.61,228.5,-3.89,UNDER
+2026-10-30 23:10:00+00:00,2026-27,Washington Wizards,Charlotte Hornets,draftkings,0.1414,0.8586,-112,-108,0.5043,0.4957,0.3629,AWAY,-18.9,-1.5,-17.4,AWAY,226.56,235.5,-8.94,UNDER
+2026-10-30 23:40:00+00:00,2026-27,Boston Celtics,Chicago Bulls,draftkings,0.7521,0.2479,-575,425,0.8173,0.1827,0.0651,AWAY,7.05,-11.5,18.55,HOME,231.09,232.5,,PASS
+2026-10-30 23:40:00+00:00,2026-27,Brooklyn Nets,Detroit Pistons,draftkings,0.0957,0.9043,250,-310,0.2742,0.7258,0.1786,AWAY,-15.94,7.5,-23.44,AWAY,228.12,225.5,,PASS
+2026-10-30 23:40:00+00:00,2026-27,Philadelphia 76ers,New York Knicks,draftkings,0.2444,0.7556,-125,105,0.5325,0.4675,0.2881,AWAY,-10.71,-2.5,-8.21,AWAY,218.15,231.5,-13.35,UNDER
+2026-10-30 23:40:00+00:00,2026-27,Toronto Raptors,Orlando Magic,draftkings,0.469,0.531,-155,130,0.583,0.417,0.114,AWAY,-0.34,-3.5,3.16,HOME,212.55,226.5,-13.95,UNDER
+2026-10-31 00:10:00+00:00,2026-27,Miami Heat,Indiana Pacers,draftkings,0.6443,0.3557,-148,124,0.5721,0.4279,0.0722,HOME,13.82,-3.5,17.32,HOME,238.43,241.5,-3.07,UNDER
+2026-10-31 00:10:00+00:00,2026-27,Minnesota Timberwolves,Los Angeles Clippers,draftkings,0.4628,0.5372,-345,275,0.7441,0.2559,0.2812,AWAY,2.08,-9.5,11.58,HOME,233.46,230.5,,PASS
+2026-10-31 02:10:00+00:00,2026-27,Phoenix Suns,Denver Nuggets,draftkings,0.309,0.691,110,-130,0.4573,0.5427,0.1482,AWAY,-7.11,2.5,-9.61,AWAY,224.53,233.5,-8.97,UNDER
+2026-10-31 02:10:00+00:00,2026-27,Golden State Warriors,Los Angeles Lakers,draftkings,0.2991,0.7009,-105,-115,0.4892,0.5108,0.1901,AWAY,-8.38,1.5,-9.88,AWAY,229.61,236.5,-6.89,UNDER

@@ -1,0 +1,6 @@
+commence_time,season,home_team,away_team,bookmaker,model_home_win_prob,model_away_win_prob,market_home_ml,market_away_ml,market_home_prob,market_away_prob,ml_edge,ml_pick,model_margin,market_spread,spread_edge,spread_pick,model_total,market_total,total_edge,total_pick
+2026-11-15 00:10:00+00:00,2026-27,New Orleans Pelicans,Denver Nuggets,pinnacle,0.2333,0.7667,459,-581,0.1733,0.8267,0.06,HOME,-12.37,12.0,-24.37,AWAY,236.33,234.5,,PASS
+2026-11-15 00:40:00+00:00,2026-27,Cleveland Cavaliers,Dallas Mavericks,pinnacle,0.6831,0.3169,107,-120,0.4697,0.5303,0.2134,HOME,11.61,1.5,10.11,HOME,231.68,231.5,,PASS
+2026-11-15 01:10:00+00:00,2026-27,Memphis Grizzlies,Brooklyn Nets,pinnacle,0.3912,0.6088,-155,140,0.5933,0.4067,0.2021,AWAY,-2.32,-3.5,,PASS,238.74,228.0,10.74,OVER
+2026-11-15 01:10:00+00:00,2026-27,Minnesota Timberwolves,Chicago Bulls,pinnacle,0.6181,0.3819,-922,672,0.8744,0.1256,0.2563,AWAY,4.37,-15.5,19.87,HOME,232.92,235.5,,PASS
+2026-11-15 01:10:00+00:00,2026-27,Miami Heat,Detroit Pistons,pinnacle,0.3455,0.6545,170,-191,0.3607,0.6393,,PASS,-5.16,5.0,-10.16,AWAY,228.51,229.0,,PASS

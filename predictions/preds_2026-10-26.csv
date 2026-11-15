@@ -1,0 +1,11 @@
+commence_time,season,home_team,away_team,bookmaker,model_home_win_prob,model_away_win_prob,market_home_ml,market_away_ml,market_home_prob,market_away_prob,ml_edge,ml_pick,model_margin,market_spread,spread_edge,spread_pick,model_total,market_total,total_edge,total_pick
+2026-10-26 23:10:00+00:00,2026-27,Charlotte Hornets,Washington Wizards,pinnacle,0.7584,0.2416,-145,130,0.5765,0.4235,0.1819,HOME,9.99,-2.5,12.49,HOME,229.29,228.5,,PASS
+2026-10-26 23:10:00+00:00,2026-27,Cleveland Cavaliers,Minnesota Timberwolves,pinnacle,0.5311,0.4689,-169,149,0.61,0.39,0.079,AWAY,-3.91,-4.5,,PASS,223.48,234.0,-10.52,UNDER
+2026-10-26 23:40:00+00:00,2026-27,Boston Celtics,Chicago Bulls,pinnacle,0.754,0.246,-702,538,0.8481,0.1519,0.0941,AWAY,6.82,-14.0,20.82,HOME,231.09,232.5,,PASS
+2026-10-26 23:40:00+00:00,2026-27,Miami Heat,Dallas Mavericks,pinnacle,0.6129,0.3871,-300,251,0.7247,0.2753,0.1118,AWAY,4.64,-7.5,12.14,HOME,245.76,240.0,5.76,OVER
+2026-10-27 00:10:00+00:00,2026-27,Milwaukee Bucks,Indiana Pacers,pinnacle,0.4663,0.5337,153,-171,0.3851,0.6149,0.0812,HOME,9.61,4.0,5.61,HOME,229.98,239.0,-9.02,UNDER
+2026-10-27 00:10:00+00:00,2026-27,Oklahoma City Thunder,Phoenix Suns,pinnacle,0.7731,0.2269,-397,331,0.7749,0.2251,,PASS,10.23,-9.5,19.73,HOME,222.52,221.5,,PASS
+2026-10-27 00:40:00+00:00,2026-27,Houston Rockets,Atlanta Hawks,pinnacle,0.5843,0.4157,-187,167,0.635,0.365,0.0507,AWAY,-0.96,-5.0,4.04,HOME,213.78,229.5,-15.72,UNDER
+2026-10-27 01:10:00+00:00,2026-27,Utah Jazz,Memphis Grizzlies,pinnacle,0.4066,0.5934,-114,103,0.5196,0.4804,0.1129,AWAY,6.18,-1.5,7.68,HOME,256.67,238.5,18.17,OVER
+2026-10-27 02:10:00+00:00,2026-27,Denver Nuggets,Golden State Warriors,pinnacle,0.6593,0.3407,-253,221,0.697,0.303,0.0378,AWAY,9.53,-7.0,16.53,HOME,228.47,236.5,-8.03,UNDER
+2026-10-28 23:10:00+00:00,2026-27,Indiana Pacers,Philadelphia 76ers,fanduel,0.273,0.727,108,-126,0.463,0.537,0.19,AWAY,-15.64,1.5,-17.14,AWAY,225.42,237.5,-12.08,UNDER

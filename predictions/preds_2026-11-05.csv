@@ -1,0 +1,3 @@
+commence_time,season,home_team,away_team,bookmaker,model_home_win_prob,model_away_win_prob,market_home_ml,market_away_ml,market_home_prob,market_away_prob,ml_edge,ml_pick,model_margin,market_spread,spread_edge,spread_pick,model_total,market_total,total_edge,total_pick
+2026-11-06 02:10:00+00:00,2026-27,Phoenix Suns,Orlando Magic,pinnacle,0.3974,0.6026,-104,-106,0.4977,0.5023,0.1003,AWAY,-2.69,-1.0,,PASS,221.08,223.0,,PASS
+2026-11-06 03:10:00+00:00,2026-27,Golden State Warriors,Miami Heat,pinnacle,0.347,0.653,-265,224,0.7017,0.2983,0.3547,AWAY,6.67,-7.0,13.67,HOME,240.02,234.0,6.02,OVER
