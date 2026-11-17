@@ -5,10 +5,14 @@ Reads:  predictions/preds_*.csv        (all archived predictions)
         predictions/bet_slips_*.csv    (bet slip CSVs, new)
 Fetches: nba_api LeagueGameFinder for recent dates only (with retries)
 Writes: predictions/tracked.csv        (one row per resolved game)
-        logs/bet_slip_accuracy.csv     (one row per fully-resolved slip, new)
+        logs/bet_slip_accuracy.csv     (only when fresh results are fetched)
 
 Run:
   python src\\track_accuracy.py
+
+Exit codes:
+  0  success (or nothing to do)
+  1  failure (fetch failed, network down) — batch log will show FAILED
 """
 
 from __future__ import annotations
@@ -90,7 +94,6 @@ def load_all_predictions() -> pd.DataFrame:
 # FETCH ACTUAL RESULTS (with retries)
 # ---------------------------------------------------------------------------
 def _call_league_game_finder(date_from: str, date_to: str) -> pd.DataFrame:
-    """Single call to nba_api. Raises on failure."""
     finder = leaguegamefinder.LeagueGameFinder(
         date_from_nullable=date_from,
         date_to_nullable=date_to,
@@ -130,10 +133,8 @@ def fetch_recent_results(dates: list) -> pd.DataFrame:
                 time.sleep(wait)
 
     if raw is None:
-        print(f"  all {NBA_MAX_RETRIES} attempts failed. "
-              f"stats.nba.com may be down or rate-limiting.")
+        print(f"  all {NBA_MAX_RETRIES} attempts failed.")
         print(f"  last error: {type(last_err).__name__}: {last_err}")
-        print(f"  TIP: try again in a few minutes, or reduce the date window.")
         return pd.DataFrame()
 
     if raw.empty:
@@ -204,7 +205,6 @@ def add_hit_flags(df: pd.DataFrame) -> pd.DataFrame:
     resolved = df["actual_home_win"].notna()
     df["resolved"] = resolved
 
-    # ML
     df["ml_correct"] = np.nan
     mask = resolved & df["ml_pick"].isin(["HOME", "AWAY"])
     home_won = df["actual_home_win"] == 1
@@ -213,7 +213,6 @@ def add_hit_flags(df: pd.DataFrame) -> pd.DataFrame:
     df.loc[mask & (df["ml_pick"] == "AWAY") & ~home_won, "ml_correct"] = 1
     df.loc[mask & (df["ml_pick"] == "AWAY") & home_won, "ml_correct"] = 0
 
-    # Spread (existing formula preserved — NOT modified per spec)
     df["spread_correct"] = np.nan
     mask = resolved & df["spread_pick"].isin(["HOME", "AWAY"]) & df["market_spread"].notna()
     df.loc[mask & (df["spread_pick"] == "HOME") &
@@ -225,7 +224,6 @@ def add_hit_flags(df: pd.DataFrame) -> pd.DataFrame:
     df.loc[mask & (df["spread_pick"] == "AWAY") &
            (df["actual_margin"] > df["market_spread"]), "spread_correct"] = 0
 
-    # Total
     df["total_correct"] = np.nan
     mask = resolved & df["total_pick"].isin(["OVER", "UNDER"]) & df["market_total"].notna()
     df.loc[mask & (df["total_pick"] == "OVER") &
@@ -251,13 +249,11 @@ def summarize(df: pd.DataFrame) -> None:
     print(f"{'='*70}")
 
     if resolved.empty:
-        print("No resolved games yet. Run again after some games finish.")
+        print("No resolved games yet.")
         return
 
     def block(label: str, pick_col: str, hit_col: str):
-        r = resolved[resolved[pick_col].isin(
-            ["HOME", "AWAY", "OVER", "UNDER"]
-        )]
+        r = resolved[resolved[pick_col].isin(["HOME", "AWAY", "OVER", "UNDER"])]
         if r.empty:
             print(f"\n  {label}: no actionable picks yet")
             return
@@ -268,14 +264,12 @@ def summarize(df: pd.DataFrame) -> None:
         print(f"    picks:     {n}")
         print(f"    correct:   {correct}")
         print(f"    accuracy:  {pct:.3f}")
-
         for side in ["HOME", "AWAY", "OVER", "UNDER"]:
             side_df = r[r[pick_col] == side]
             if len(side_df) == 0:
                 continue
             acc = side_df[hit_col].mean()
-            print(f"      {side:6s}: {int(side_df[hit_col].sum()):3d}/{len(side_df):3d}"
-                  f"  ({acc:.3f})")
+            print(f"      {side:6s}: {int(side_df[hit_col].sum()):3d}/{len(side_df):3d}  ({acc:.3f})")
 
     block("MONEYLINE", "ml_pick", "ml_correct")
     block("SPREAD", "spread_pick", "spread_correct")
@@ -293,9 +287,13 @@ def summarize(df: pd.DataFrame) -> None:
 
 
 # ===========================================================================
-# BET SLIP ACCURACY (NEW SECTION)
+# BET SLIP ACCURACY
 # ===========================================================================
 def _slip_pick_correct(pick_row, tracked_df: pd.DataFrame):
+    """Return True/False if pick is correct, or None if not resolvable.
+
+    IMPORTANT: only matches the SAME date. No fallback to older games.
+    """
     pick_market = pick_row["Market_Type"]
     team = pick_row["Team"]
     home = pick_row["HomeTeam"]
@@ -312,7 +310,8 @@ def _slip_pick_correct(pick_row, tracked_df: pd.DataFrame):
     match["_utc_date"] = match["commence_time"].dt.strftime("%Y-%m-%d")
     date_match = match[match["_utc_date"] == game_date]
     if date_match.empty:
-        date_match = match
+        # No game on that date — this pick cannot be evaluated
+        return None
 
     row = date_match.iloc[0]
     if not bool(row.get("resolved", False)):
@@ -444,21 +443,6 @@ def print_bet_slip_summary(df: pd.DataFrame) -> None:
         print(f"    {mkt:12s} {w}/{len(grp)} ({w/len(grp):.3f})")
 
 
-def append_bet_slip_accuracy() -> None:
-    try:
-        if not TRACKED_PATH.exists():
-            print("\n(skipping bet slip accuracy — no tracked.csv yet)")
-            return
-        tracked = pd.read_csv(TRACKED_PATH)
-        tracked["commence_time"] = pd.to_datetime(
-            tracked["commence_time"], utc=True, errors="coerce"
-        )
-        slip_results = track_bet_slips(tracked)
-        print_bet_slip_summary(slip_results)
-    except Exception as e:
-        print(f"\n(bet slip accuracy failed: {e!r})")
-
-
 # ---------------------------------------------------------------------------
 # MAIN
 # ---------------------------------------------------------------------------
@@ -476,17 +460,28 @@ def main() -> int:
     print(f"  games ready to check: {len(eligible)}")
 
     if eligible.empty:
-        print("\nNo games have finished yet. Run again later.")
-        append_bet_slip_accuracy()
+        print("\nNo games have finished yet.")
         return 0
 
     dates = eligible["commence_time"].dt.tz_convert("UTC").dt.tz_localize(None).tolist()
     results = fetch_recent_results(dates)
+
     if results.empty:
-        print("  no results returned from nba_api (games may not be in the DB yet)")
-        print("  (bet slip accuracy will still be evaluated against existing tracked.csv)")
-        append_bet_slip_accuracy()
-        return 0
+        print()
+        print("=" * 70)
+        print("FETCH FAILED — aborting without overwriting any files")
+        print("=" * 70)
+        print("  Reason: nba_api returned no results (network / rate limit)")
+        print("  track_accuracy.py is exiting with code 1")
+        print("  Batch logs will show FAILED for this run")
+        print()
+        print("  NO changes made to:")
+        print(f"    {TRACKED_PATH.relative_to(PROJECT_ROOT)}")
+        print(f"    {BET_SLIP_ACC_PATH.relative_to(PROJECT_ROOT)} (if it existed)")
+        print()
+        print("  Try again in a few hours. stats.nba.com outages are temporary.")
+        return 1
+
     print(f"  fetched {len(results)} actual results")
 
     merged = score_predictions(eligible, results)
@@ -509,7 +504,13 @@ def main() -> int:
 
     summarize(out)
 
-    append_bet_slip_accuracy()
+    # Only NOW (fresh results in hand) evaluate bet slips
+    tracked = pd.read_csv(TRACKED_PATH)
+    tracked["commence_time"] = pd.to_datetime(
+        tracked["commence_time"], utc=True, errors="coerce"
+    )
+    slip_results = track_bet_slips(tracked)
+    print_bet_slip_summary(slip_results)
 
     print(f"\n[done] track_accuracy complete.")
     return 0
