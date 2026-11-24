@@ -1,5 +1,5 @@
 """
-Step 7 — Generate live predictions for upcoming NBA games.
+Generate live predictions for upcoming NBA games.
 
 Reads:  models/moneyline.pkl, margin.pkl, total.pkl, feature_columns.json
         data/processed/features.csv   (to replay team state up to today)
@@ -10,13 +10,18 @@ Writes: predictions/latest.csv                 (overwrites)
 
 Run:
   python src\\predict_live.py
+
+ML PICK FILTER (added Nov 2026):
+  Live performance showed the model was 40.6% accurate on ML, but 66.7% when
+  model confidence >= 0.75. The filter below suppresses low-confidence ML
+  picks (marks them PASS) so only high-signal bets reach the pipeline.
 """
 
 from __future__ import annotations
 
 import json
 from collections import deque
-from datetime import datetime, timezone, timedelta
+from datetime import datetime
 from pathlib import Path
 
 import numpy as np
@@ -46,14 +51,13 @@ ELO_K = 20.0
 HOME_ADVANTAGE_ELO = 100.0
 ROLL_WINDOW_LONG = 10
 SEASON_OPENER_REST_DAYS = 7
-HORIZON_DAYS = 14                # only predict games within next 14 days
-EDGE_THRESHOLD = 0.03            # 3% edge required to flag a pick
-
-# At the season boundary, pull each team's Elo 25% back toward the mean.
-# Reflects offseason roster turnover that Elo otherwise misses.
+HORIZON_DAYS = 14
+EDGE_THRESHOLD = 0.03
 SEASON_REGRESSION = 0.25
 
-# Team-name aliases: keys come from The Odds API, values match nba_api names
+# NEW: ML confidence filter (from Nov 2026 diagnostic)
+ML_MIN_MODEL_PROB = 0.75
+
 TEAM_ALIASES = {
     "Los Angeles Clippers": "LA Clippers",
     "LA Clippers": "LA Clippers",
@@ -131,7 +135,7 @@ def replay_team_state(features: pd.DataFrame) -> dict:
 
     elo: dict[int, float] = {}
     last_game_date: dict[int, pd.Timestamp] = {}
-    last_season: dict[int, str] = {}       # most recent season a team played in
+    last_season: dict[int, str] = {}
 
     season_wins: dict[tuple, int] = {}
     season_games: dict[tuple, int] = {}
@@ -159,7 +163,6 @@ def replay_team_state(features: pd.DataFrame) -> dict:
         home_elo = elo.get(hid, ELO_START)
         away_elo = elo.get(aid, ELO_START)
 
-        # Season-boundary Elo regression to mean
         if hid in last_season and last_season[hid] != season:
             home_elo = home_elo * (1 - SEASON_REGRESSION) + ELO_START * SEASON_REGRESSION
         if aid in last_season and last_season[aid] != season:
@@ -193,8 +196,6 @@ def replay_team_state(features: pd.DataFrame) -> dict:
         recent_pts_against.setdefault(hid, deque(maxlen=ROLL_WINDOW_LONG)).append(away_pts)
         recent_pts_against.setdefault(aid, deque(maxlen=ROLL_WINDOW_LONG)).append(home_pts)
 
-    # ---- Build "last completed season" stats per team ----
-    # For each team, find their most recent season and record final stats.
     last_season_stats: dict[int, dict] = {}
     for (tid, season), games_played in season_games.items():
         if last_season.get(tid) != season:
@@ -246,8 +247,6 @@ def build_upcoming_features(state: dict, home_id: int, away_id: int,
     away_rest = rest(away_id)
 
     def season_stat(team_id, stat_key):
-        """Return stat from current season if any games; else fall back to
-        team's most recent completed season; else NaN."""
         games = state["season_games"].get((team_id, current_season), 0)
         if games > 0:
             if stat_key == "win_pct":
@@ -269,18 +268,15 @@ def build_upcoming_features(state: dict, home_id: int, away_id: int,
         "away_elo_pre": away_elo,
         "elo_diff_pre": home_elo - away_elo,
         "elo_home_win_prob_pre": expected_home_win(home_elo, away_elo),
-
         "home_rest_days": home_rest,
         "away_rest_days": away_rest,
         "rest_diff": home_rest - away_rest,
         "home_b2b": int(home_rest <= 1),
         "away_b2b": int(away_rest <= 1),
-
         "home_season_win_pct": season_stat(home_id, "win_pct"),
         "away_season_win_pct": season_stat(away_id, "win_pct"),
         "home_home_win_pct":   season_stat(home_id, "home_win_pct"),
         "away_away_win_pct":   season_stat(away_id, "away_win_pct"),
-
         "home_win_pct_last5":  mean_of_last(state["recent_results"], home_id, 5),
         "away_win_pct_last5":  mean_of_last(state["recent_results"], away_id, 5),
         "home_win_pct_last10": mean_of_last(state["recent_results"], home_id, 10),
@@ -292,6 +288,30 @@ def build_upcoming_features(state: dict, home_id: int, away_id: int,
         "home_avg_pts_against_last5": mean_of_last(state["recent_pts_against"], home_id, 5),
         "away_avg_pts_against_last5": mean_of_last(state["recent_pts_against"], away_id, 5),
     }
+
+
+# ---------------------------------------------------------------------------
+# ML PICK LOGIC (with confidence filter)
+# ---------------------------------------------------------------------------
+def decide_ml_pick(p_home: float, mkt_home: float, mkt_away: float) -> tuple:
+    if pd.isna(mkt_home) or pd.isna(mkt_away):
+        return "PASS", np.nan
+
+    model_pick_side = "HOME" if p_home >= 0.5 else "AWAY"
+    model_pick_prob = p_home if model_pick_side == "HOME" else 1.0 - p_home
+
+    if model_pick_side == "HOME":
+        edge = p_home - mkt_home
+    else:
+        edge = (1.0 - p_home) - mkt_away
+
+    if model_pick_prob < ML_MIN_MODEL_PROB:
+        return "PASS", np.nan
+
+    if edge < EDGE_THRESHOLD:
+        return "PASS", np.nan
+
+    return model_pick_side, float(edge)
 
 
 # ---------------------------------------------------------------------------
@@ -313,6 +333,7 @@ def main() -> int:
     with open(FEATURE_JSON) as f:
         feature_cols = json.load(f)
     print(f"Loaded models. {len(feature_cols)} feature columns.")
+    print(f"ML filter: only bet when model prob >= {ML_MIN_MODEL_PROB:.2f}")
 
     if not FEATURES_CSV.exists():
         print(f"ERROR: missing {FEATURES_CSV}")
@@ -323,8 +344,6 @@ def main() -> int:
                            dtype={"game_id": str})
     state = replay_team_state(features)
     print(f"  replayed {len(features)} historical games")
-    print(f"  last completed season stats known for "
-          f"{len(state['last_season_stats'])} teams")
 
     name_to_id = {}
     for df, name_col, id_col in [(features, "home_team", "home_team_id"),
@@ -376,15 +395,7 @@ def main() -> int:
         imp_away_raw = american_to_implied(g.away_ml)
         mkt_home, mkt_away = devig_two_way(imp_home_raw, imp_away_raw)
 
-        home_edge = p_home - mkt_home if not pd.isna(mkt_home) else np.nan
-        away_edge = (1 - p_home) - mkt_away if not pd.isna(mkt_away) else np.nan
-
-        ml_pick, ml_edge = "PASS", np.nan
-        if not pd.isna(home_edge) and not pd.isna(away_edge):
-            if home_edge >= EDGE_THRESHOLD and home_edge >= away_edge:
-                ml_pick, ml_edge = "HOME", home_edge
-            elif away_edge >= EDGE_THRESHOLD:
-                ml_pick, ml_edge = "AWAY", away_edge
+        ml_pick, ml_edge = decide_ml_pick(p_home, mkt_home, mkt_away)
 
         spread_pick, spread_edge = "PASS", np.nan
         if not pd.isna(g.home_spread):
@@ -408,7 +419,6 @@ def main() -> int:
             "home_team": g.home_team,
             "away_team": g.away_team,
             "bookmaker": g.bookmaker,
-
             "model_home_win_prob": round(p_home, 4),
             "model_away_win_prob": round(1 - p_home, 4),
             "market_home_ml": g.home_ml,
@@ -417,12 +427,10 @@ def main() -> int:
             "market_away_prob": round(mkt_away, 4) if not pd.isna(mkt_away) else np.nan,
             "ml_edge": round(float(ml_edge), 4) if not pd.isna(ml_edge) else np.nan,
             "ml_pick": ml_pick,
-
             "model_margin": round(pred_margin, 2),
             "market_spread": g.home_spread,
             "spread_edge": round(float(spread_edge), 2) if not pd.isna(spread_edge) else np.nan,
             "spread_pick": spread_pick,
-
             "model_total": round(pred_total, 2),
             "market_total": g.total,
             "total_edge": round(float(total_edge), 2) if not pd.isna(total_edge) else np.nan,
@@ -477,7 +485,7 @@ def main() -> int:
     print(f"  Spread: {preds['spread_pick'].value_counts().to_dict()}")
     print(f"  Total:  {preds['total_pick'].value_counts().to_dict()}")
 
-    print(f"\n[done] Step 7 complete.")
+    print(f"\n[done] predict_live complete.")
     return 0
 
 
